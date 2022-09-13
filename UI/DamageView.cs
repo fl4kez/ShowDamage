@@ -54,9 +54,13 @@ namespace ShowDamage.UI
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        protected override void DrawSelf(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ModContent.GetTexture("ShowDamage/Textures/Blank"), new Vector2(Main.screenWidth - 20, Main.screenHeight - 20) / 2f, color);
+            CalculatedStyle dimensions = GetDimensions();
+            Point point1 = new Point((int)dimensions.X, (int)dimensions.Y);
+            int width = (int)Math.Ceiling(dimensions.Width);
+            int height = (int)Math.Ceiling(dimensions.Height);
+            spriteBatch.Draw(ModContent.GetTexture("ShowDamage/Textures/Blank"), new Rectangle(point1.X, point1.Y, width, height), color);
         }
     }
 }

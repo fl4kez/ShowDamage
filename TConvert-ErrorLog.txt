@@ -1,0 +1,9 @@
+------------------------------------------------
+Time: 13.09.2022 13:57:10
+
+Error: Extracting: C:\Program Files (x86)\Steam\steamapps\common\Terraria\Content\PixelShader.xnb
+    Reason: Xnb error (Unsupported asset type: Microsoft.Xna.Framework.Content.EffectReader.)
+Error: Extracting: C:\Program Files (x86)\Steam\steamapps\common\Terraria\Content\ScreenShader.xnb
+    Reason: Xnb error (Unsupported asset type: Microsoft.Xna.Framework.Content.EffectReader.)
+Error: Extracting: C:\Program Files (x86)\Steam\steamapps\common\Terraria\Content\TileShader.xnb
+    Reason: Xnb error (Unsupported asset type: Microsoft.Xna.Framework.Content.EffectReader.)

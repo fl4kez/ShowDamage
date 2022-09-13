@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ShowDamage
@@ -28,7 +29,17 @@ namespace ShowDamage
                 ShowDamage.damageSourcesBase[proj.Name] = ShowDamage.damageSourcesBase[proj.Name] + proj.damage;
             }
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
-            Main.NewText($"{proj.Name}:{ShowDamage.damageSourcesScaled[proj.Name]}({ShowDamage.damageSourcesBase[proj.Name]})///{proj.damage}///{valBase}");
+            Main.NewText($"{proj.Name}:{ShowDamage.damageSourcesScaled[proj.Name]}({ShowDamage.damageSourcesBase[proj.Name]})");
+
+            /*int npcCount = 0;
+            foreach(NPC npc in Main.npc)
+            {
+                if (npc.townNPC)
+                    npcCount += 1;
+            }
+            int c = NPCID.Sets.Skeletons.Count;
+            Main.NewText($"{npcCount} {c} {c/npcCount}");*/
+            
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
@@ -49,7 +60,7 @@ namespace ShowDamage
                 ShowDamage.damageSourcesBase[item.Name] = ShowDamage.damageSourcesBase[item.Name] + item.damage;
             }
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
-            Main.NewText($"{item.Name}:{ShowDamage.damageSourcesScaled[item.Name]}({ShowDamage.damageSourcesBase[item.Name]})///{item.damage}///{valBase}");
+            Main.NewText($"{item.Name}:{ShowDamage.damageSourcesScaled[item.Name]}({ShowDamage.damageSourcesBase[item.Name]})");
         }
     }
 }

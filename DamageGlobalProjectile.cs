@@ -12,7 +12,7 @@ namespace ShowDamage
 {
     public class DamageGlobalProjectile : GlobalProjectile
     {
-        Item myWeapon;
+        public Item myWeapon;
         /*public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
             float valScaled = 0;
@@ -32,14 +32,10 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{projectile.Name}:{ShowDamage.damageSourcesScaled[projectile.Name]}({ShowDamage.damageSourcesBase[projectile.Name]})");
         }*/
-        public Item GetMyWep()
+        public override bool PreAI(Projectile projectile)
         {
-            return myWeapon;
-        }
-        public override void SetDefaults(Projectile projectile)
-        {
-            base.SetDefaults(projectile);
             myWeapon = Main.player[projectile.owner].HeldItem;
+            return base.PreAI(projectile);
         }
         public override bool InstancePerEntity => true;
     }

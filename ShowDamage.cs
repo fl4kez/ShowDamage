@@ -9,21 +9,29 @@ namespace ShowDamage
 {
     public class ShowDamage : Mod
     {
-        
-
         public static DamageViewCanvas DamageView;
         private UserInterface _damageView;
 
+        int timer = -1;
         public override void Load()
         {
-            DamageView = new DamageViewCanvas();
-            DamageView.Activate();
-            _damageView = new UserInterface();
-            _damageView.SetState(DamageView);
+            if (!Main.dedServ)
+            {
+                DamageView = new DamageViewCanvas();
+                DamageView.Activate();
+                _damageView = new UserInterface();
+                _damageView.SetState(DamageView);
+            }
         }
+        private GameTime _lastUpdateUiGameTime;
+
         public override void UpdateUI(GameTime gameTime)
         {
-            _damageView?.Update(gameTime);
+            _lastUpdateUiGameTime = gameTime;
+            if (_damageView?.CurrentState != null)
+            {
+                _damageView.Update(gameTime);
+            }
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
@@ -35,11 +43,26 @@ namespace ShowDamage
                     delegate
                     {
                         //_damageView.Update(Main._drawInterfaceGameTime);
-                        _damageView.Draw(Main.spriteBatch, new GameTime());
+                        _damageView.Draw(Main.spriteBatch, _lastUpdateUiGameTime);
                         return true;
                     },
                     InterfaceScaleType.UI)
                 );
+            }
+        }
+        public override void MidUpdateTimeWorld()
+        {
+            base.MidUpdateTimeWorld();
+            if(DamageView.hitEnemy)
+            {
+                DamageView.hitEnemy = false;
+                timer = 600;
+            }
+            timer--;
+            if(timer == 0)
+            {
+                DamageView.Reset();
+                timer = -1;
             }
         }
     }

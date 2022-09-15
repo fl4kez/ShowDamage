@@ -21,5 +21,6 @@ namespace ShowDamage
         {
             //ShowDamage.DamageView.SetOptions(basedChecked, scaledChecked);
         }
+        
     }
 }

@@ -14,24 +14,25 @@ namespace ShowDamage.UI
     {
         //public DamageView damageView;
         public DragableUIPanel uiPanel;
-        public UIText tbox;
+        //public UIText tbox;
         public static Dictionary<string,UIText> dict;
 
         public static bool isVisible;
 
         public bool showBased = true, showScaled = true;
-        int timer = 0;
+        public bool hitEnemy;
 
         public override void Update(GameTime gameTime)
         {
-            //base.Update(gameTime);
-            if (Main.GameUpdateCount % 60 == 0 && timer > 0)
-            {
+            base.Update(gameTime);
+            //Main.NewText(Main.frameRate);
+            /*if (timer > 0)
                 timer--;
-                //Main.NewText(timer);
-            }
-            if (timer <= 0)
+            if (timer == 0)
+            {
                 Reset();
+                timer = -1;
+            }*/
         }
         public override void OnInitialize()
         {
@@ -40,7 +41,7 @@ namespace ShowDamage.UI
 
             
             uiPanel.Width.Set(200f, 0f);
-            uiPanel.Height.Set(300f, 0f);
+            uiPanel.Height.Set(100f, 0f);
             uiPanel.Left.Set(Main.miniMapX-Main.miniMapWidth, 0f);
             uiPanel.Top.Set(100f, 0f);
             uiPanel.BackgroundColor = new Color(73, 94, 171);
@@ -68,6 +69,7 @@ namespace ShowDamage.UI
 
         public void Reset()
         {
+            Main.NewText("RESET");
             dict = new Dictionary<string, UIText>();
             uiPanel.RemoveAllChildren();
         }
@@ -79,7 +81,8 @@ namespace ShowDamage.UI
         }
         public void AddEntry(string name, float based, float scaled,Color color)
         {
-            timer = 10;
+            //timer = 60*10;
+            hitEnemy = true;
             if (dict.ContainsKey(name))
             {
                 string damageValues = dict[name].Text.Split('-')[1];

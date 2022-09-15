@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,7 @@ namespace ShowDamage
 {
     public class DamageGlobalProjectile : GlobalProjectile
     {
+        Item myWeapon;
         /*public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
             float valScaled = 0;
@@ -29,6 +32,15 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{projectile.Name}:{ShowDamage.damageSourcesScaled[projectile.Name]}({ShowDamage.damageSourcesBase[projectile.Name]})");
         }*/
-
+        public Item GetMyWep()
+        {
+            return myWeapon;
+        }
+        public override void SetDefaults(Projectile projectile)
+        {
+            base.SetDefaults(projectile);
+            myWeapon = Main.player[projectile.owner].HeldItem;
+        }
+        public override bool InstancePerEntity => true;
     }
 }

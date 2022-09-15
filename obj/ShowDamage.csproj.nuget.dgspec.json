@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj": {}
+    "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj": {
+    "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
+        "projectUniqueName": "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
         "projectName": "ShowDamage",
-        "projectPath": "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
-        "packagesPath": "C:\\Users\\gornicec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\obj\\",
+        "projectPath": "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
+        "packagesPath": "C:\\Users\\marvi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gornicec\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,7 +45,7 @@
               "version": "[0.1.*, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

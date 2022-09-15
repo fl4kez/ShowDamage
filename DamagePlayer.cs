@@ -46,19 +46,21 @@ namespace ShowDamage
             //base.OnHitNPCWithProj(proj, target, damage, knockback, crit);
             float valScaled = damage;
             float valBase = proj.damage;
-            Main.NewText($"B:{valBase} S:{valScaled}");
-            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, colors[proj.Name]);
+            //Main.NewText($"B:{valBase} S:{valScaled}");
+            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, ItemRarity.GetColor(player.HeldItem.rare)/*ItemRarity.GetColor(proj.GetGlobalProjectile<DamageGlobalProjectile>().GetMyWep().rare)*/);
 
         }
-
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             //base.OnHitNPC(item, target, damage, knockback, crit);
-            float valScaled = damage;
-            float valBase = player.GetWeaponDamage(item);
-            Main.NewText($"B:{valBase} S:{valScaled}");
-            
-            ShowDamage.DamageView.AddEntry(item.Name, valBase, valScaled, ItemRarity.GetColor(item.rare));
+            if (item.melee == true)
+            {
+                float valScaled = damage;
+                float valBase = player.GetWeaponDamage(item);
+                //Main.NewText($"B:{valBase} S:{valScaled}");
+
+                ShowDamage.DamageView.AddEntry(item.Name, valBase, valScaled, ItemRarity.GetColor(item.rare));
+            }
             //base.OnHitNPC(item, target, damage, knockback, crit);
            
             /*if (!DamageView.damageSourcesScaled.TryGetValue(item.Name, out valScaled) && !DamageView.damageSourcesBase.TryGetValue(item.Name, out valBase))
@@ -76,11 +78,6 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{item.Name}:{DamageView.damageSourcesScaled[item.Name]}({DamageView.damageSourcesBase[item.Name]})");*/
             //base.OnHitNPC(item, target, damage, knockback, crit);
-        }
-        public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
-        {
-            colors.Add(item.Name, ItemRarity.GetColor(item.rare));
-            return base.Shoot(item, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
         }
     }
 }

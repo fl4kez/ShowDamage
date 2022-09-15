@@ -32,6 +32,8 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{projectile.Name}:{ShowDamage.damageSourcesScaled[projectile.Name]}({ShowDamage.damageSourcesBase[projectile.Name]})");
         }*/
+        
+        
         public override bool PreAI(Projectile projectile)
         {
             myWeapon = Main.player[projectile.owner].HeldItem;

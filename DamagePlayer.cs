@@ -48,7 +48,11 @@ namespace ShowDamage
             float valScaled = damage;
             float valBase = proj.damage;
             //Main.NewText($"B:{valBase} S:{valScaled}");e
-            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, ItemRarity.GetColor(proj.GetGlobalProjectile<DamageGlobalProjectile>().myWeapon.rare));
+            Item wep = proj.GetGlobalProjectile<DamageGlobalProjectile>().myWeapon;
+            Color cl = ItemRarity.GetColor(wep.rare);
+            if (wep.rare == ItemRarityID.Red)
+                cl = Color.Red;
+            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, cl);
             //Main.NewText($"{proj.GetGlobalProjectile<DamageGlobalProjectile>().GetMyWep().Name}");
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)

@@ -12,6 +12,7 @@ namespace ShowDamage
         public static DamageViewCanvas DamageView;
         private UserInterface _damageView;
 
+        public static ModHotKey toggleUI;
         int timer = -1;
         public override void Load()
         {
@@ -22,6 +23,7 @@ namespace ShowDamage
                 _damageView = new UserInterface();
                 _damageView.SetState(DamageView);
             }
+            toggleUI = RegisterHotKey("Toggle UI", "L");
         }
         private GameTime _lastUpdateUiGameTime;
 
@@ -65,5 +67,19 @@ namespace ShowDamage
                 timer = -1;
             }
         }
+        public void ToggleUI()
+        {
+            if (DamageViewCanvas.isVisible)
+            {
+                _damageView?.SetState(null);
+                DamageViewCanvas.isVisible = false;
+            }
+            else
+            {
+                _damageView?.SetState(DamageView);
+                DamageViewCanvas.isVisible = true;
+            }
+        }
+        
     }
 }

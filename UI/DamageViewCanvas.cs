@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace ShowDamage.UI
@@ -14,10 +15,11 @@ namespace ShowDamage.UI
     {
         //public DamageView damageView;
         public DragableUIPanel uiPanel;
+        public UIImageButton resetBtn;
         //public UIText tbox;
         public static Dictionary<string,UIText> dict;
 
-        public static bool isVisible;
+        public static bool isVisible = true;
 
         public bool showBased = true, showScaled = true;
         public bool hitEnemy;
@@ -34,6 +36,10 @@ namespace ShowDamage.UI
                 timer = -1;
             }*/
         }
+        private void OnButtonClick(UIMouseEvent evt, UIElement listeningElement)
+        {
+            Reset();
+        }
         public override void OnInitialize()
         {
             uiPanel = new DragableUIPanel();
@@ -41,11 +47,16 @@ namespace ShowDamage.UI
 
             
             uiPanel.Width.Set(200f, 0f);
-            uiPanel.Height.Set(100f, 0f);
+            uiPanel.Height.Set(20, 0f);
             uiPanel.Left.Set(Main.miniMapX-Main.miniMapWidth, 0f);
             uiPanel.Top.Set(100f, 0f);
             uiPanel.BackgroundColor = new Color(73, 94, 171);
 
+            resetBtn = new UIImageButton(ModContent.GetTexture("Terraria/UI/ButtonDelete"));
+            resetBtn.Left.Set(uiPanel.Width.Pixels-resetBtn.Width.Pixels, 0);
+            resetBtn.Top.Set(0, 0);
+            resetBtn.OnClick += OnButtonClick;
+            uiPanel.Append(resetBtn);
             /*damageView = new DamageView();
             damageView.Height.Set(400f, 0);
             damageView.Width.Set(150f, 0);
@@ -70,8 +81,13 @@ namespace ShowDamage.UI
         public void Reset()
         {
             Main.NewText("RESET");
+            foreach (UIText item in dict.Values)
+            {
+                uiPanel.RemoveChild(item);
+            }
             dict = new Dictionary<string, UIText>();
-            uiPanel.RemoveAllChildren();
+            uiPanel.Height.Set(20, 0f);
+            //uiPanel.RemoveAllChildren();
         }
 
         public void SetOptions(bool based,bool scaled)
@@ -112,6 +128,7 @@ namespace ShowDamage.UI
                 box.Top.Set(dict.Count * 20, 0);
                 dict.Add(name, box);
                 uiPanel.Append(box);
+                uiPanel.Height.Set(20 + (dict.Count * 20), 0);
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -46,12 +47,13 @@ namespace ShowDamage
             //base.OnHitNPCWithProj(proj, target, damage, knockback, crit);
             float valScaled = damage;
             float valBase = proj.damage;
-            //Main.NewText($"B:{valBase} S:{valScaled}");
+            //Main.NewText($"B:{valBase} S:{valScaled}");e
             ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, ItemRarity.GetColor(proj.GetGlobalProjectile<DamageGlobalProjectile>().myWeapon.rare));
             //Main.NewText($"{proj.GetGlobalProjectile<DamageGlobalProjectile>().GetMyWep().Name}");
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
+            //Main.NewText(Main.projectile[item.shoot].Name);
             //base.OnHitNPC(item, target, damage, knockback, crit);
             if (item.melee == true)
             {
@@ -79,6 +81,14 @@ namespace ShowDamage
             Main.NewText($"{item.Name}:{DamageView.damageSourcesScaled[item.Name]}({DamageView.damageSourcesBase[item.Name]})");*/
             //base.OnHitNPC(item, target, damage, knockback, crit);
         }
-
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            base.ProcessTriggers(triggersSet);
+           
+            if(ShowDamage.toggleUI.JustPressed)
+            {
+                ModContent.GetInstance<ShowDamage>().ToggleUI();
+            }
+        }
     }
 }

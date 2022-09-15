@@ -25,10 +25,10 @@ namespace ShowDamage.UI
         public override void Update(GameTime gameTime)
         {
             //base.Update(gameTime);
-            if (Main.GameUpdateCount % 60 == 0)
+            if (Main.GameUpdateCount % 60 == 0 && timer > 0)
             {
                 timer--;
-                Main.NewText(timer);
+                //Main.NewText(timer);
             }
             if (timer <= 0)
                 Reset();

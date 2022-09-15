@@ -1,4 +1,5 @@
-﻿using ShowDamage.UI;
+﻿using Microsoft.Xna.Framework;
+using ShowDamage.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace ShowDamage
 {
     public class DamagePlayer : ModPlayer 
     {
+        Dictionary<string, Color> colors = new Dictionary<string, Color>();
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             //base.OnHitNPCWithProj(proj, target, damage, knockback, crit);
@@ -45,7 +47,7 @@ namespace ShowDamage
             float valScaled = damage;
             float valBase = proj.damage;
             Main.NewText($"B:{valBase} S:{valScaled}");
-            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, ItemRarity.GetColor(player.HeldItem.rare));
+            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, colors[proj.Name]);
 
         }
 
@@ -74,6 +76,11 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{item.Name}:{DamageView.damageSourcesScaled[item.Name]}({DamageView.damageSourcesBase[item.Name]})");*/
             //base.OnHitNPC(item, target, damage, knockback, crit);
+        }
+        public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        {
+            colors.Add(item.Name, ItemRarity.GetColor(item.rare));
+            return base.Shoot(item, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
         }
     }
 }

@@ -16,19 +16,35 @@ namespace ShowDamage.UI
     {
         Color color;
         public float baseDmg, scaledDmg;
-        public DamageListItem(Color color, float baseDmg, float scaledDmg)
+        UIText nameTxt;
+        UIText baseTxt;
+        UIText scaledTxt;
+        public DamageListItem(Color color, float baseDmg, float scaledDmg,string name)
         {
             this.color = color;
             this.baseDmg = baseDmg;
             this.scaledDmg = scaledDmg;
+
+            nameTxt = new UIText(name);
+            nameTxt.Left.Set(15, 0);
+            Append(nameTxt);
+
+            baseTxt = new UIText(baseDmg.ToString());
+            baseTxt.HAlign = 0.5f;
+            Append(baseTxt);
+
+            scaledTxt = new UIText(scaledDmg.ToString());
+            scaledTxt.Left.Set(100,0);
+            Append(scaledTxt);
+            
         }
         /*public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(ModContent.GetTexture("Terraria/UI/InnerPanelBackground"), new Vector2(Main.screenWidth - 20, Main.screenHeight - 20) / 2f, color);
         }*/
-        protected override void DrawSelf(SpriteBatch spriteBatch)
+        /*protected override void Draw(SpriteBatch spriteBatch)
         {
-            base.DrawSelf(spriteBatch);
-        }
+            Utils.DrawBorderString(spriteBatch, "ListItem", new Vector2(Main.screenWidth - Parent.Width.Pixels, Main.screenHeight - Parent.Height.Pixels), color);
+        }*/
     }
 }

@@ -11,7 +11,7 @@ namespace ShowDamage
     {
         
 
-        internal DamageViewCanvas DamageView;
+        public static DamageViewCanvas DamageView;
         private UserInterface _damageView;
 
         public override void Load()

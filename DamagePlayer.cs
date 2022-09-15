@@ -15,7 +15,7 @@ namespace ShowDamage
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             //base.OnHitNPCWithProj(proj, target, damage, knockback, crit);
-            float valScaled = 0;
+            //float valScaled = 0;
             /*float valBase = 0;
             if (!DamageView.damageSourcesScaled.TryGetValue(proj.Name, out valScaled) && !DamageView.damageSourcesBase.TryGetValue(proj.Name, out valBase))
             {
@@ -41,13 +41,19 @@ namespace ShowDamage
             int c = NPCID.Sets.Skeletons.Count;
             Main.NewText($"{npcCount} {c} {c/npcCount}");*/
             //base.OnHitNPCWithProj(proj, target, damage, knockback, crit);
+            float valScaled = damage;
+            float valBase = proj.damage;
+            Main.NewText($"B:{valBase} S:{valScaled}");
+            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled);
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             //base.OnHitNPC(item, target, damage, knockback, crit);
-            float valScaled = 0;
-            float valBase = 0;
+            float valScaled = damage;
+            float valBase = player.GetWeaponDamage(item);
+            Main.NewText($"B:{valBase} S:{valScaled}");
+            ShowDamage.DamageView.AddEntry(item.Name, valBase, valScaled);
             /*if (!DamageView.damageSourcesScaled.TryGetValue(item.Name, out valScaled) && !DamageView.damageSourcesBase.TryGetValue(item.Name, out valBase))
             {
                 DamageView.damageSourcesScaled.Add(item.Name, valScaled);

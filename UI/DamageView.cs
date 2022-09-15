@@ -36,16 +36,16 @@ namespace ShowDamage.UI
                 //damageSourcesBase.Add(name, dmgBase);
                 //damageSourcesScaled.Add(name, dmgScaled);
 
-                DamageListItem item = new DamageListItem(new Color(255, 255, 200),dmgBase,dmgScaled);
+                DamageListItem item = new DamageListItem(new Color(255, 255, 200),dmgBase,dmgScaled,name);
                 //item.Parent = this;
                 item.Height.Set(25f, 0);
                 item.Width.Set(300f, 0);
-                item.Left.Set(Main.screenWidth - Width.Pixels, 0f);
-                item.Top.Set(5f * items.Count+1, 0);
+                //item.Left.Set(Main.screenWidth - Width.Pixels, 0f);
+                //item.Top.Set(5f * items.Count+1, 0);
                 //items.Add(name, item);
-
-                //Append(item);
                 Add(item);
+                Append(item);
+                
             }
             else
             {
@@ -54,13 +54,17 @@ namespace ShowDamage.UI
             }
         }
 
-        protected override void DrawSelf(SpriteBatch spriteBatch)
+        /*protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             CalculatedStyle dimensions = GetDimensions();
             Point point1 = new Point((int)dimensions.X, (int)dimensions.Y);
             int width = (int)Math.Ceiling(dimensions.Width);
             int height = (int)Math.Ceiling(dimensions.Height);
             spriteBatch.Draw(ModContent.GetTexture("ShowDamage/Textures/Blank"), new Rectangle(point1.X, point1.Y, width, height), color);
+        }*/
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(ModContent.GetTexture("ShowDamage/Textures/Blank"), new Vector2(Main.screenWidth - this.Parent.Width.Pixels - this.Width.Pixels, Main.screenHeight - this.Parent.Height.Pixels - 10), color);
         }
     }
 }

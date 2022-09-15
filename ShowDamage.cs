@@ -34,7 +34,7 @@ namespace ShowDamage
                     "ShowDamage: DPS per source",
                     delegate
                     {
-                        _damageView.Update(Main._drawInterfaceGameTime);
+                        //_damageView.Update(Main._drawInterfaceGameTime);
                         _damageView.Draw(Main.spriteBatch, new GameTime());
                         return true;
                     },

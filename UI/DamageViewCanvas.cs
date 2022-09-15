@@ -18,6 +18,21 @@ namespace ShowDamage.UI
         public static Dictionary<string,UIText> dict;
 
         public static bool isVisible;
+
+        public bool showBased = true, showScaled = true;
+        int timer = 0;
+
+        public override void Update(GameTime gameTime)
+        {
+            //base.Update(gameTime);
+            if (Main.GameUpdateCount % 60 == 0)
+            {
+                timer--;
+                Main.NewText(timer);
+            }
+            if (timer <= 0)
+                Reset();
+        }
         public override void OnInitialize()
         {
             uiPanel = new DragableUIPanel();
@@ -51,18 +66,43 @@ namespace ShowDamage.UI
             Append(uiPanel);
         }
 
-        public void AddEntry(string name, float based, float scaled)
+        public void Reset()
         {
+            dict = new Dictionary<string, UIText>();
+            uiPanel.RemoveAllChildren();
+        }
+
+        public void SetOptions(bool based,bool scaled)
+        {
+            showBased = based;
+            showScaled = scaled;
+        }
+        public void AddEntry(string name, float based, float scaled,Color color)
+        {
+            timer = 10;
             if (dict.ContainsKey(name))
             {
                 string damageValues = dict[name].Text.Split('-')[1];
                 float prevBased = int.Parse(damageValues.Split('/')[0]);
                 float prevScaled = int.Parse(damageValues.Split('/')[1]);
-                dict[name].SetText($"{name}-{based+prevBased}/{scaled+prevScaled}");
+                string outputString = $"{name}";
+                if (showBased)
+                    outputString += $"-{based + prevBased}";
+                if (showScaled)
+                    outputString += $"/{scaled + prevScaled}";
+
+
+                dict[name].SetText(outputString);
             }
             else
             {
-                UIText box = new UIText($"{name}-{based}/{scaled}");
+                string outputString = $"{name}";
+                if (showBased)
+                    outputString += $"-{based}";
+                if (showScaled)
+                    outputString += $"/{scaled}";
+                UIText box = new UIText(outputString);
+                box.TextColor = color;
                 box.Width.Percent = 1;
                 box.PaddingTop = 12;
                 //tbox.TextScale = 1;

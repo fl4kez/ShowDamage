@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -44,7 +45,8 @@ namespace ShowDamage
             float valScaled = damage;
             float valBase = proj.damage;
             Main.NewText($"B:{valBase} S:{valScaled}");
-            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled);
+            ShowDamage.DamageView.AddEntry(proj.Name, valBase, valScaled, ItemRarity.GetColor(player.HeldItem.rare));
+
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
@@ -53,7 +55,10 @@ namespace ShowDamage
             float valScaled = damage;
             float valBase = player.GetWeaponDamage(item);
             Main.NewText($"B:{valBase} S:{valScaled}");
-            ShowDamage.DamageView.AddEntry(item.Name, valBase, valScaled);
+            
+            ShowDamage.DamageView.AddEntry(item.Name, valBase, valScaled, ItemRarity.GetColor(item.rare));
+            //base.OnHitNPC(item, target, damage, knockback, crit);
+           
             /*if (!DamageView.damageSourcesScaled.TryGetValue(item.Name, out valScaled) && !DamageView.damageSourcesBase.TryGetValue(item.Name, out valBase))
             {
                 DamageView.damageSourcesScaled.Add(item.Name, valScaled);

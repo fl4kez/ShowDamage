@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShowDamage.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,19 @@ namespace ShowDamage
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
+        [ReloadRequired]
         [Label("Show base damage")]
         public bool basedChecked = true;
 
+        [ReloadRequired]
         [Label("Show true damage")]
         public bool scaledChecked = true;
 
         public override void OnChanged()
         {
+            DamageViewCanvas.showBased = basedChecked;
+            DamageViewCanvas.showScaled = scaledChecked;
             //ShowDamage.DamageView.SetOptions(basedChecked, scaledChecked);
         }
-        
     }
 }

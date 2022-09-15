@@ -21,7 +21,7 @@ namespace ShowDamage.UI
 
         public static bool isVisible = true;
 
-        public bool showBased = true, showScaled = true;
+        public static bool showBased, showScaled;
         public bool hitEnemy;
 
         public override void Update(GameTime gameTime)
@@ -42,6 +42,7 @@ namespace ShowDamage.UI
         }
         public override void OnInitialize()
         {
+
             uiPanel = new DragableUIPanel();
             uiPanel.SetPadding(0);
 
@@ -101,25 +102,40 @@ namespace ShowDamage.UI
             hitEnemy = true;
             if (dict.ContainsKey(name))
             {
-                string damageValues = dict[name].Text.Split('-')[1];
-                float prevBased = int.Parse(damageValues.Split('/')[0]);
-                float prevScaled = int.Parse(damageValues.Split('/')[1]);
-                string outputString = $"{name}";
-                if (showBased)
-                    outputString += $"-{based + prevBased}";
-                if (showScaled)
-                    outputString += $"/{scaled + prevScaled}";
-
+                string[] split = dict[name].Text.Split('/');
+                float prevBased, prevScaled;
+                
+                string outputString = "";
+                if (showBased && showScaled)
+                {
+                    prevBased = int.Parse(split[1]);
+                    prevScaled = int.Parse(split[2]);
+                    outputString = $"{name}/{based + prevBased}/{scaled + prevScaled}";
+                }
+                else if (showBased)
+                {
+                    prevBased = int.Parse(split[1]);
+                    outputString = $"{name}/{based + prevBased}";
+                }
+                else if (showScaled)
+                {
+                    prevScaled = int.Parse(split[1]);
+                    outputString = $"{name}/{scaled + prevScaled}";
+                }
 
                 dict[name].SetText(outputString);
             }
             else
             {
-                string outputString = $"{name}";
-                if (showBased)
-                    outputString += $"-{based}";
-                if (showScaled)
-                    outputString += $"/{scaled}";
+                string outputString = $"";
+                if (showBased && showScaled)
+                {
+                    outputString = $"{name}/{based}/{scaled}";
+                }
+                else if (showBased)
+                    outputString = $"{name}/{based}";
+                else if (showScaled)
+                    outputString = $"{name}/{scaled}";
                 UIText box = new UIText(outputString);
                 box.TextColor = color;
                 box.Width.Percent = 1;

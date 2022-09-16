@@ -16,7 +16,8 @@ namespace ShowDamage.UI
         //public DamageView damageView;
         public DragableUIPanel uiPanel;
         public UIImageButton resetBtn;
-        //public UIText tbox;
+        public UIText sumDmg;
+        public float sumDmgValue = 0;
         public static Dictionary<string,UIText> dict;
 
         public static bool isVisible = true;
@@ -58,6 +59,13 @@ namespace ShowDamage.UI
             resetBtn.Top.Set(0, 0);
             resetBtn.OnClick += OnButtonClick;
             uiPanel.Append(resetBtn);
+
+            sumDmg = new UIText("Total Damage");
+            sumDmg.HAlign = 0.5f;
+            sumDmg.Top.Set(0, 0);
+            sumDmg.Width.Set(0, 0.9f);
+
+            uiPanel.Append(sumDmg);
             /*damageView = new DamageView();
             damageView.Height.Set(400f, 0);
             damageView.Width.Set(150f, 0);
@@ -82,9 +90,12 @@ namespace ShowDamage.UI
         public void Reset()
         {
             Main.NewText("RESET");
+            sumDmg.SetText("Total Damage");
+            sumDmgValue = 0;
             foreach (UIText item in dict.Values)
             {
-                uiPanel.RemoveChild(item);
+                if(item != sumDmg)
+                    uiPanel.RemoveChild(item);
             }
             dict = new Dictionary<string, UIText>();
             uiPanel.Height.Set(20, 0f);
@@ -146,6 +157,8 @@ namespace ShowDamage.UI
                 uiPanel.Append(box);
                 uiPanel.Height.Set(20 + (dict.Count * 20), 0);
             }
+            sumDmgValue += scaled;
+            sumDmg.SetText($"Total: {sumDmgValue}");
         }
     }
 }

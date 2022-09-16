@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "uDo8P4cJVRekOShEV/cfVlt1AjthHsgI/uVDxRxYbEI4qHC59NbXHuNKuzdRmNEe8IIBb9S5IKxNwTyFKrbAjQ==",
+  "dgSpecHash": "YoO31lSLR7EA5q84s88Q+t6D0S1t4CM6Y1x3Hqp5j53ZXB5fBXwqdcOfdNU4pi0hr5EXog8o55mrZ+67euAciA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marvi\\OneDrive\\Dokumente\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
+  "projectFilePath": "C:\\Users\\gornicec\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\ShowDamage\\ShowDamage.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\marvi\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+    "C:\\Users\\gornicec\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],
   "logs": []
 }

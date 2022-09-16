@@ -29,7 +29,6 @@ namespace ShowDamage
             //base.OnHitNPC(item, player, target, damage, knockBack, crit);
             Main.NewText($"{item.Name}:{ShowDamage.damageSourcesScaled[item.Name]}({ShowDamage.damageSourcesBase[item.Name]})");
         }*/
-        
     }
 
 }
